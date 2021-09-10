@@ -5,8 +5,8 @@ var cors = require('cors')
 
 const { port, user, pwd } = require("./helpers/config");
 //---------------------------------------------
-// const userRoute = require("./routes/user_route");
-// const adminRoute = require("./routes/admin_route")
+const userRoute = require("./routes/user_route");
+const adminRoute = require("./routes/admin_route")
 const path = require("path");
 //-------------------------------------------------
 const app = express();
@@ -14,7 +14,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //routes---------
-// app.use("/user", userRoute);  
+app.use("/user", userRoute);  
 // app.use('/admin',adminRoute);
 //Admin Panel ------------------------------------------------------------------------------------------------------------------------------------------------
 // app.use("/adminpanel/", express.static(path.join(__dirname, 'dist','adminpanel')));
@@ -26,10 +26,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
   // app.get('/',(req,res)=>{
   //   res.send('hello web???>>>>>>>>>>>>>>>>>>');
   // })
-//----------------------------------------------------URLS-----------------------------------------------------------------------------------------------------
+//----------------------------------------------------URLS (MONGO-DB CONNECTION)----------------------------------------------------------------------------------------------------
 let url = "mongodb://localhost:27017/Super";
-// let url = `mongodb://${user}:${pwd}@127.0.0.1:27017/Autocentral`;//For commiting on server
-// let url = `mongodb://${user}:${pwd}@65.2.155.222:27017/Autocentral`;//For commiting on server
+
 //..........----------------------------------------------.....................----------------------................................................................................
 
 let mongoClientConstructor = {
