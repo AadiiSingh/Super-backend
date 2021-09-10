@@ -1,0 +1,28 @@
+{
+  "name": "super",
+  "version": "1.0.0",
+  "description": "Practice Project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/adityabhadoria019/super.git"
+  },
+  "author": "Aditya Bhadoria",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/adityabhadoria019/super/issues"
+  },
+  "homepage": "https://gitlab.com/adityabhadoria019/super#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.5",
+    "nodemon": "^2.0.12",
+    "path": "^0.12.7"
+  }
+}
