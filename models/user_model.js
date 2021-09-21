@@ -4,19 +4,28 @@ const userSchema = new mongoose.Schema(
         name: {
             type: String
         },
-        email_address: {
+        email: {
             type: String
         },
-        mobile_number: {
+        mobile: {
             type: Number
         },
         address: {
             type: String
         },
-    },{
-        versionKey: false,
-        timestamps: false,
-    }
+        token: {
+            type: String
+        },
+        roleId: {
+            type: Number         // 2 for user .... 1 for admin
+        },
+        password: {
+            type: String
+        }
+    }, {
+    versionKey: false,
+    timestamps: false,
+}
 
 );
 

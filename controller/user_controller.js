@@ -11,3 +11,13 @@ exports.signup = async (req, res) => {
         res.status(400).send(err);
     }
 };
+
+exports.user_signIn = async (req, res) => {
+    try {
+        let r = await user_business.user_signIn(req);
+        res.status(200).send(r);
+    } catch (err) {
+        console.log("Error is : " + err);
+        res.status(400).send(err);
+    }
+};

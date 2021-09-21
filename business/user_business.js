@@ -1,6 +1,8 @@
 const config = require("../helpers/config");
 const bcrypt = require("bcrypt");
+const { userModel } = require("../models/user_model")
 const jwt = require("jsonwebtoken");
+const md5 = require("md5");
 
 
 
@@ -8,40 +10,14 @@ exports.registerUser = async (req) => {
     let data = req.body;
     data.roleId = 2;
     // 2 for user .... 1 for admin
-
-    let { longitude, latitude } = req.body;
-    longitude = longitude ? longitude : 77.391;
-    latitude = latitude ? latitude : 28.5355;
-    req.body.location = { type: "Point", coordinates: [longitude, latitude] };
-
-    data.mobile = parseInt(data.mobile);
-    data.isMobileVerified = false;
-    if (
-        !data.countryCode ||
-        data.countryCode == null ||
-        data.countryCode == "NA" ||
-        data.countryCode == undefined
-    )
-        throw { message: msg.mobileNumAndCountryCodeRequire };
-    if (!data.firstname || !data.lastname)
-        throw { message: msg.firstnameAndlastnameRequire };
-
-    if (!data.email) throw { message: msg.emailisRequire };
-
     //check if given number is already exist
-    let isMobileExist = await users.findOne({ mobile: data.mobile }).lean();
-    if (isMobileExist) throw { message: msg.mobileAlreadyExist };
+    let isMobileExist = await userModel.findOne({ mobile: data.mobile }).lean();
+    if (isMobileExist != null) throw { error: "Mobile Already Exist" };
 
-    let isEmailExist = await users.findOne({ email: data.email }).lean();
-    if (isEmailExist) throw { message: msg.emailAlreadyExist };
+    let isEmailExist = await userModel.findOne({ email: data.email }).lean();
+    if (isEmailExist != null) throw { error: "Email Already Exist" };
 
-    // if (data.confirmPassword === data.password) {
-    //   let pass = await bcrypt.hash(req.body.password, 10);
-    //   data.password = pass;
-    // } else {
-    //   throw { message: msg.fieldNotMatch };
-    // }
-    let res = new users(data);
+    let res = new userModel(data);
     let result = await res.save();
     /**
      * if User is registered without errors
@@ -52,14 +28,25 @@ exports.registerUser = async (req) => {
         config.secret
     );
     result["token"] = token;
-    let saveToken = await users.findOneAndUpdate(
-        { mobile: data.mobile, countryCode: data.countryCode },
-        { $set: { token: token } },
+    let saveToken = await userModel.findOneAndUpdate(
+        { mobile: data.mobile },
+        { $set: { token: token, roleId: data.roleId, password: md5(data.password) } },
         { new: true }
     );
-    let aa = await sendOtpDuringRegistration(data.mobile, data.countryCode);
-    return {
-        response: result,
-        message: msg.registrationSuccessfullAndOtpSentOnMobile,
-    };
+    return result;
+};
+
+exports.user_signIn = async (data) => {
+    try {
+        if (data.userId) {
+            let userDetails = await userModel.find({ _id: data.userId }).lean();
+            return {
+                response: userDetails,
+                message: "Login Success"
+            };
+        }
+    } catch (e) {
+        return e.error
+
+    }
 };

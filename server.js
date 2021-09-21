@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //routes---------
 app.use("/user", userRoute);  
 // app.use('/admin',adminRoute);
-//Admin Panel ------------------------------------------------------------------------------------------------------------------------------------------------
+//Admin Panel -------------------------------------------------------------------------------------------------               -----------------------------------------------
 // app.use("/adminpanel/", express.static(path.join(__dirname, 'dist','adminpanel')));
 // 	app.get('/adminpanel/*', (req, res) => {
 // 		// res.sendFile(`${__dirname}/adminpanel/index.html`);
