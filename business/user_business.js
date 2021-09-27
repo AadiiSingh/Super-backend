@@ -40,9 +40,9 @@ exports.user_signIn = async (data) => {
     try {
         if (data.email) {
             let userDetails = await userModel.find({ email: data.email }).lean();
-            if (userDetails) {
+            if (userDetails.length != 0) {
                 let checkPass = await userModel.find({ password: md5(data.password) }).lean();
-                if (checkPass) {
+                if (checkPass.length !=  0) {
                     let token = jwt.sign({
                         id: checkPass._id
                     }, config.secret)
@@ -51,15 +51,11 @@ exports.user_signIn = async (data) => {
                         response: saveLoginToken,
                         message: "Login Success"
                     };
-                }
-            }
-        }
-        else
-            return {
-                message: "please check creds and try again"
-            }
+                } throw Error("Invalid Password");
+            } throw Error("User Doen Not Exist");
+        }  throw Error("Invalid Creds");         
     } catch (e) {
-        return e.error
+        return {error: e.message}
 
     }
 };
