@@ -14,7 +14,7 @@ exports.signup = async (req, res) => {
 
 exports.user_signIn = async (req, res) => {
     try {
-        let r = await user_business.user_signIn(req);
+        let r = await user_business.user_signIn(req.body);
         res.status(200).send(r);
     } catch (err) {
         console.log("Error is : " + err);

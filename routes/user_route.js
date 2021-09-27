@@ -11,7 +11,7 @@ const user_controller = require("../controller/user_controller")
 
 route.post('/user_signup', user_controller.signup);
 
-route.post('/user_signIn', jwt.verifyToken, user_controller.user_signIn);
+route.post('/user_signIn', user_controller.user_signIn);
 
 
 

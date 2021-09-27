@@ -38,13 +38,26 @@ exports.registerUser = async (req) => {
 
 exports.user_signIn = async (data) => {
     try {
-        if (data.userId) {
-            let userDetails = await userModel.find({ _id: data.userId }).lean();
-            return {
-                response: userDetails,
-                message: "Login Success"
-            };
+        if (data.email) {
+            let userDetails = await userModel.find({ email: data.email }).lean();
+            if (userDetails) {
+                let checkPass = await userModel.find({ password: md5(data.password) }).lean();
+                if (checkPass) {
+                    let token = jwt.sign({
+                        id: checkPass._id
+                    }, config.secret)
+                    let saveLoginToken = await userModel.findOneAndUpdate({ password: md5(data.password) }, { $set: { token: token } },{new :true});
+                    return {
+                        response: saveLoginToken,
+                        message: "Login Success"
+                    };
+                }
+            }
         }
+        else
+            return {
+                message: "please check creds and try again"
+            }
     } catch (e) {
         return e.error
 
