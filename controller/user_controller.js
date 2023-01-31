@@ -21,3 +21,9 @@ exports.user_signIn = async (req, res) => {
         res.status(400).send(err);
     }
 };
+
+exports.update = async(req,res)=>{
+    res.status(200).json({
+        Response:"this is update"
+    })
+}

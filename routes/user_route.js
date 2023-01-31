@@ -9,7 +9,7 @@ var jwt = require('../middleware/jwt');
 const user_controller = require("../controller/user_controller")
 
 
-route.post('/user_signup', user_controller.signup);
+route.post('/user_signup', user_controller.signup).get('/user_signup', user_controller.update);
 
 route.post('/user_signIn', user_controller.user_signIn);
 
