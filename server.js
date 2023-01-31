@@ -27,7 +27,8 @@ app.use("/user", userRoute);
   //   res.send('hello web???>>>>>>>>>>>>>>>>>>');
   // })
 //----------------------------------------------------URLS (MONGO-DB CONNECTION)----------------------------------------------------------------------------------------------------
-let url = "mongodb://127.0.0.1:27017/Super";
+// const url = "mongodb://127.0.0.1:27017/Super";
+const url = `mongodb+srv://superUserAdmin:ByMPC6MynSCcMDQU@cluster0.q1eo1di.mongodb.net/Super`;
 
 //..........----------------------------------------------.....................----------------------................................................................................
 
@@ -40,7 +41,7 @@ mongoose.connect(url, mongoClientConstructor, (err) => {
   if (err) {
     console.log("Error is : " + err);
   } else {
-    console.log("MongoDb is successfully connected at....", url);
+    console.log("MongoDb is successfully connected");
   }
 });
 
