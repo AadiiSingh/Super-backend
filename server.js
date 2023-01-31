@@ -24,7 +24,7 @@ app.use("/user", userRoute);
 //   })
 
   app.get('/',(req,res)=>{
-    res.send('hello web???>>>>>>>>>>>>>>>>>>');
+    res.json({response : "HI Its working"});
   })
 //----------------------------------------------------URLS (MONGO-DB CONNECTION)----------------------------------------------------------------------------------------------------
 // const url = "mongodb://127.0.0.1:27017/Super";
