@@ -23,9 +23,9 @@ app.use("/user", userRoute);
 // 		res.sendFile(path.join(__dirname, 'dist', 'adminpanel', 'index.html'))
 //   })
 
-  // app.get('/',(req,res)=>{
-  //   res.send('hello web???>>>>>>>>>>>>>>>>>>');
-  // })
+  app.get('/',(req,res)=>{
+    res.send('hello web???>>>>>>>>>>>>>>>>>>');
+  })
 //----------------------------------------------------URLS (MONGO-DB CONNECTION)----------------------------------------------------------------------------------------------------
 // const url = "mongodb://127.0.0.1:27017/Super";
 const url = `mongodb+srv://superUserAdmin:ByMPC6MynSCcMDQU@cluster0.q1eo1di.mongodb.net/Super`;
