@@ -17,14 +17,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/user", userRoute);  
 // app.use('/admin',adminRoute);
 // Admin Panel -------------------------------------------------------------------------------------------------               -----------------------------------------------
-app.use("/home/", express.static(path.join(__dirname, 'dist','website')));
-	app.get('/home/*', (req, res) => {
+app.use("/", express.static(path.join(__dirname, 'dist','website')));
+	app.get('/*', (req, res) => {
 		res.sendFile(path.join(__dirname, 'dist', 'website', 'index.html'))
   })
 
-  app.get('/',(req,res)=>{
-    res.json({response : "HI Its working"});
-  })
+  // app.get('/',(req,res)=>{
+  //   res.json({response : "HI Its working"});
+  // })
 //----------------------------------------------------URLS (MONGO-DB CONNECTION)----------------------------------------------------------------------------------------------------
 // const url = "mongodb://127.0.0.1:27017/Super";
 const url = `mongodb+srv://superUserAdmin:ByMPC6MynSCcMDQU@cluster0.q1eo1di.mongodb.net/Super`;
