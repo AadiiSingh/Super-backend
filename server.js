@@ -16,12 +16,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //routes---------
 app.use("/user", userRoute);  
 // app.use('/admin',adminRoute);
-//Admin Panel -------------------------------------------------------------------------------------------------               -----------------------------------------------
-// app.use("/adminpanel/", express.static(path.join(__dirname, 'dist','adminpanel')));
-// 	app.get('/adminpanel/*', (req, res) => {
-// 		// res.sendFile(`${__dirname}/adminpanel/index.html`);
-// 		res.sendFile(path.join(__dirname, 'dist', 'adminpanel', 'index.html'))
-//   })
+// Admin Panel -------------------------------------------------------------------------------------------------               -----------------------------------------------
+app.use("/home/", express.static(path.join(__dirname, 'dist','website')));
+	app.get('/home/*', (req, res) => {
+		res.sendFile(path.join(__dirname, 'dist', 'website', 'index.html'))
+  })
 
   app.get('/',(req,res)=>{
     res.json({response : "HI Its working"});
